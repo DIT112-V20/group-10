@@ -5,12 +5,9 @@
 
 
 
-const int fSpeed   = 30;
-const int bSpeed   = -70; 
-const int lDegrees = -75; 
-const int rDegrees = 75; 
-const int obstacleAhead  = 500; 
-
+const int forward = 30;
+const int brake = 0;
+const int millimeterLimit = 300;
 BrushedMotor leftMotor(smartcarlib::pins::v2::leftMotorPins);
 BrushedMotor rightMotor(smartcarlib::pins::v2::rightMotorPins);
 DifferentialControl control(leftMotor, rightMotor);
@@ -32,8 +29,15 @@ void setup() {
 }
 
 void loop() {
-
   Serial.println(sensor.readRangeContinuousMillimeters());
+
+
+
+  while(sensor.readRangeContinuousMillimeters()> millimeterLimit ) {
+    car.setSpeed(forward);
+  }
+
+  car.setSpeed(brake);
   
 
   
