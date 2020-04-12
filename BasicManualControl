@@ -17,27 +17,31 @@ void loop(){
     handleInput();}
 
 void handleInput()
-{ // handle serial input if there is any
+{ 
     if (Serial.available())
     {
         char input = Serial.read(); // read everything that has been received so far and log down
                                     // the last entry
         switch (input)
         {
-        case 'l': // rotate counter-clockwise going forward
+        case 'l': //  go left
             car.setSpeed(fSpeed);
             car.setAngle(lDegrees);
             break;
-        case 'r': // turn clock-wise
+        case 'r': // go right
             car.setSpeed(fSpeed);
             car.setAngle(rDegrees);
             break;
-        case 'f': // go ahead
+        case 'f': // go forward 
             car.setSpeed(fSpeed);
             car.setAngle(0);
             break;
-        case 'b': // go back
+        case 'b': // go backward
             car.setSpeed(bSpeed);
+            car.setAngle(0);
+            break;
+        case 's' : //stop
+            car.setSpeed(0);
             car.setAngle(0);
             break;
         default: // if you receive something that you don't know, just stop

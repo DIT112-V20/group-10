@@ -16,15 +16,13 @@ VL53L0X sensor;
 
 void setup() {
   Serial.begin(9600);
-  Wire.begin();  
-}
+  Wire.begin();}
 
 void loop() {
   Serial.println(sensor.readRangeContinuousMillimeters());
   while(sensor.readRangeContinuousMillimeters()> millimeterLimit ) {
     car.setSpeed(forward);
   }
-
   car.setSpeed(brake);
-
+   
 }
