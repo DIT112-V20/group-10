@@ -28,10 +28,6 @@ void setup() {
 void loop() {
  handleInput();
   Serial.println(sensor.readRangeContinuousMillimeters());
-  while(sensor.readRangeContinuousMillimeters()> millimeterLimit ) {
-    car.setSpeed(forwardSpeed);
-  }
-  car.setSpeed(brake);
    
 }
 void handleInput()
@@ -41,6 +37,9 @@ void handleInput()
            while (bluetooth.available()) {
              input = bluetooth.read();
            }
+    if (millimeterLimit > sensor.readRangeContinuousMillimeters()) {
+    car.setSpeed(brake);
+    }
         switch (input)
         {
         case 'l': //  go left
