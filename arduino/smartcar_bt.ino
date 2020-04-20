@@ -29,7 +29,7 @@ void loop() {
  handleInput();
   Serial.println(sensor.readRangeContinuousMillimeters());
   while(sensor.readRangeContinuousMillimeters()> millimeterLimit ) {
-    car.setSpeed(forward);
+    car.setSpeed(forwardSpeed);
   }
   car.setSpeed(brake);
    
