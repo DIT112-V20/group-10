@@ -3,6 +3,7 @@
 #include <VL53L0X.h>
 #include <BluetoothSerial.h>
 
+char input;
 const int forwardSpeed = 30;
 const int brake = 0;
 const int millimeterLimit = 300;
@@ -37,13 +38,24 @@ void setup() {
   Serial.begin(9600);
   Wire.begin();
   bluetooth.begin("Group 10");
+   sensor.setTimeout(500);
+  if (!sensor.init())
+  {
+    Serial.println("Failed to detect and initialize sensor!");
+    while (1) {}
+  }
+
+  // Start continuous back-to-back mode (take readings as
+  // fast as possible).  To use continuous timed mode
+  // instead, provide a desired inter-measurement period in
+  // ms (e.g. sensor.startContinuous(100)).
+  sensor.startContinuous();
 }
 
 void loop() {
- Serial.println(sensor.readRangeContinuousMillimeters());
- if(sensor.readRangeContinuousMillimeters()< millimeterLimit) {
-  car.setSpeed(brake);
- }
+   Serial.println(sensor.readRangeContinuousMillimeters());
+    Serial.println();
+
  handleInput();
  }
 
@@ -51,15 +63,17 @@ void loop() {
  { // handle serial input if there is any
      if (bluetooth.available())
      {
-         char input = bluetooth.read(); // read everything that has been received so far and log down
-                                     // the last entry
-         switch (input)
-         {
-         case 'l': // rotate counter-clockwise going forward
+         input = bluetooth.read(); // read everything that has been received so far and log down
+         while(sensor.readRangeContinuousMillimeters()<= 200){
+              car.setSpeed(0);
+             }
+     }
+
+         switch (input){
+         case 'l' : // turn left
              car.setSpeed(forwardSpeed);
              car.setAngle(lDegrees);
-             break;
-         case 'r': // turn clock-wise
+         case 'r': // turn right
              car.setSpeed(forwardSpeed);
              car.setAngle(rDegrees);
              break;
@@ -79,5 +93,4 @@ void loop() {
              car.setSpeed(0);
              car.setAngle(0);
          }
-     }
  }
