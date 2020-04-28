@@ -1,7 +1,6 @@
 #include <Smartcar.h>
 #include <Wire.h>
 #include <VL53L0X.h>
-#include <BluetoothSerial.h>
 #include <WiFi.h>
 
 char input;
@@ -38,13 +37,12 @@ DirectionlessOdometer rightOdometer(
 
 SmartCar car(control, gyroscope, leftOdometer, rightOdometer);
 VL53L0X sensor;
-BluetoothSerial bluetooth;
 
 void setup() {
   Serial.begin(9600);
   Wire.begin();
-  bluetooth.begin("Group 10");
-   sensor.setTimeout(500);
+  sensor.setTimeout(500);
+  
  Serial.println();
     Serial.println();
     Serial.print("Connecting to ");
@@ -101,8 +99,8 @@ void loop() {
             client.println();
 
             // the content of the HTTP response follows the header:
-            client.print("Click <a href=\"/H\">here</a> to turn the LED on pin 5 on.<br>");
-            client.print("Click <a href=\"/L\">here</a> to turn the LED on pin 5 off.<br>");
+            client.print("Click <a href=\"/F\">here</a> to turn on the car.<br>");
+            client.print("Click <a href=\"/S\">here</a> to turn off the car.<br>");
 
             // The HTTP response ends with another blank line:
             client.println();
@@ -115,12 +113,12 @@ void loop() {
           currentLine += c;      // add it to the end of the currentLine
         }
 
-        // Check to see if the client request was "GET /H" or "GET /L":
-        if (currentLine.endsWith("GET /H")) {
-          digitalWrite(5, HIGH);               // GET /H turns the LED on
+        // Check to see if the client request was "GET /F" or "GET /S":
+        if (currentLine.endsWith("GET /F")) {
+          car.setSpeed(forwardSpeed);               // GET /H turns the LED on
         }
-        if (currentLine.endsWith("GET /L")) {
-          digitalWrite(5, LOW);                // GET /L turns the LED off
+        if (currentLine.endsWith("GET /S")) {
+          car.setSpeed(brake);                // GET /L turns the LED off
         }
       }
     }
@@ -129,48 +127,4 @@ void loop() {
     Serial.println("Client Disconnected.");
   }
 
- handleInput();
- }
-
- void handleInput()
- { // handle serial input if there is any
-     if (bluetooth.available())
-     {
-         input = bluetooth.read(); // read everything that has been received so far and log down
-         while(sensor.readRangeContinuousMillimeters()<= millimeterLimit) {
-              car.setSpeed(0);
-             }
-     }
-
-         switch (input){
-         case 'l' : // turn left
-             car.setSpeed(forwardSpeed);
-             car.setAngle(lDegrees);
-         case 'r': // turn right
-             car.setSpeed(forwardSpeed);
-             car.setAngle(rDegrees);
-             break;
-         case 'f': // go ahead
-             car.setSpeed(forwardSpeed);
-             car.setAngle(0);
-             break;
-         case 'b': // go back
-             car.setSpeed(backSpeed);
-             car.setAngle(0);
-             break;
-         case 's': // stop the car
-             car.setSpeed(brake);
-             car.setAngle(0);
-             break;
-         case 'd': // decelerate
-             currentSpeed = forwardSpeed - diffSpeed;
-             car.setSpeed(currentSpeed);
-             break;
-         case 'a': // accelerate
-             car.setSpeed(currentSpeed);
-             break;
-         default: // if you receive something that you don't know, just stop
-             car.setSpeed(0);
-             car.setAngle(0);
-         }
  }
