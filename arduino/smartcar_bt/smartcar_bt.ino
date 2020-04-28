@@ -4,14 +4,14 @@
 #include <WiFi.h>
 
 char input;
-int forwardSpeed = 30;
-const int brake = 0;
-const int millimeterLimit = 200;
-const int backSpeed = -30;
-const int lDegrees = -30; // degrees to turn left
-const int rDegrees = 30;  // degrees to turn right
-int accelerate = 30;
-int decelerate = -30;
+int forwardSpeed = 10;
+int backSpeed = -10;
+int brake = 0;
+int millimeterLimit = 200;
+int lDegrees = -10; // degrees to turn left
+int rDegrees = 10;  // degrees to turn right
+int accelerate = 10;
+int decelerate = -10;
 int diffSpeed = 5;
 int currentSpeed;
 const unsigned long PRINT_INTERVAL = 100;
@@ -112,19 +112,32 @@ void loop() {
         } else if (c != '\r') {  // if you got anything else but a carriage return character,
           currentLine += c;      // add it to the end of the currentLine
         }
-
         // Check to see if the client request was "GET /F" or "GET /S":
         if (currentLine.endsWith("GET /F")) {
-          car.setSpeed(forwardSpeed);               // GET /H turns the LED on
+          car.setSpeed(forwardSpeed);         // GET /F makes the car run forward
         }
         if (currentLine.endsWith("GET /S")) {
-          car.setSpeed(brake);                // GET /L turns the LED off
+          car.setSpeed(brake);                // GET /S makes the car stop
+        }
+        if (currentLine.endsWith("GET /B")) {
+          car.setSpeed(backSpeed);            // GET /B makes the car go backward
+        }
+        if (currentLine.endsWith("GET /L")) {
+          car.setSpeed(lDegrees);             // GET /L makes the car go to the left
+        }
+        if (currentLine.endsWith("GET /R")) {
+          car.setSpeed(rDegrees);             // GET /R makes the car go to the right
+        }
+        if (currentLine.endsWith("GET /A")) {
+          car.setSpeed(accelerate);           // GET /A makes the car accelerate
+        }
+        if (currentLine.endsWith("GET /D")) {
+          car.setSpeed(decelerate);           // GET /D makes the car decelerate
         }
       }
     }
     // close the connection:
     client.stop();
     Serial.println("Client Disconnected.");
-  }
-
- }
+    }
+}
