@@ -101,6 +101,11 @@ void loop() {
             // the content of the HTTP response follows the header:
             client.print("Click <a href=\"/F\">here</a> to turn on the car.<br>");
             client.print("Click <a href=\"/S\">here</a> to turn off the car.<br>");
+            client.print("Click <a href=\"/L\">here</a> to turn left with the car.<br>");
+            client.print("Click <a href=\"/R\">here</a> to turn right with the car.<br>");
+            client.print("Click <a href=\"/B\">here</a> to go backwards with the car.<br>");
+            client.print("Click <a href=\"/A\">here</a> to increase car-speed.<br>");
+            client.print("Click <a href=\"/D\">here</a> to decrease car-speed.<br>");
 
             // The HTTP response ends with another blank line:
             client.println();
