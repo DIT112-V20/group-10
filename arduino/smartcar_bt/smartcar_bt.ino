@@ -17,8 +17,8 @@ int currentSpeed;
 const unsigned long PRINT_INTERVAL = 100;
 unsigned long previousPrintout = 0;
 const auto pulsesPerMeter = 600;
-const char* ssid     = "yourssid";
-const char* password = "yourpasswd";
+const char* ssid     =  "ssid";
+const char* password = "password";
 WiFiServer server(80);
 
 BrushedMotor leftMotor(smartcarlib::pins::v2::leftMotorPins);
@@ -139,10 +139,14 @@ void loop() {
         if (currentLine.endsWith("GET /D")) {
           car.setSpeed(decelerate);           // GET /D makes the car decelerate
         }
+         if(sensor.readRangeContinuousMillimeters()< 250){
+        car.setSpeed(0); }
       }
     }
+     
+      }
     // close the connection:
     client.stop();
     Serial.println("Client Disconnected.");
     }
-}
+    
