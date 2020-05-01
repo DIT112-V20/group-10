@@ -4,8 +4,8 @@
 #include <WiFi.h>
 
 char input;
-int forwardSpeed = 10;
-int backSpeed = -10;
+int forwardSpeed = 40;
+int backSpeed = -40;
 int brake = 0;
 int millimeterLimit = 200;
 int lDegrees = -10; // degrees to turn left
@@ -140,7 +140,12 @@ void loop() {
           car.setSpeed(decelerate);           // GET /D makes the car decelerate
         }
          if(sensor.readRangeContinuousMillimeters()< 250){
-        car.setSpeed(0); }
+        car.setSpeed(0);
+        delay(500);
+        car.setSpeed(-10);
+        delay(3000);
+        car.setSpeed(0);
+        }
       }
     }
      
