@@ -15,7 +15,7 @@ import okhttp3.Response;
 
 public class HTTP {
 
-    int flag = 100;
+    //int flag = 100;
 
     public void request(String url){
         OkHttpClient client = new OkHttpClient();
@@ -25,8 +25,8 @@ public class HTTP {
         client.newCall(request).enqueue(new Callback() {
             @Override
             public void onFailure(@NotNull Call call, @NotNull IOException e) {
-                System.out.println("My Url is " + url);
-                Log.i("My URL is ", url);
+                //System.out.println("My Url is " + url);
+                //Log.i("My URL is ", url);
                 e.printStackTrace();
             }
 
