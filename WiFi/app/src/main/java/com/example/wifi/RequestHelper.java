@@ -13,18 +13,18 @@ public class RequestHelper {
 
     static {
         try {
-            magess = new Magess("http://192.168.43.40/", "Magess");
+            magess = new Magess("http://192.168.0.5:80", "Magess");
         } catch (MalformedURLException e) {
             e.printStackTrace();
         }
     }
 
     public static void requestToServer(String s) {
-        if (s == "") {
-            server.request(magess.getUrl().toString() + "F");
-        } else {
+//        if (s == "") {
+//            server.request(magess.getUrl().toString() + "F");
+//        } else {
             server.request(magess.getUrl().toString() + s);
-        }
+        //}
     }
 
 }

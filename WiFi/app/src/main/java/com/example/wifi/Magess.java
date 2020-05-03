@@ -6,22 +6,22 @@ import java.net.URL;
 public class Magess {
 
     private URL url;
-    private String name;
-    private boolean active;
+    //private String name;
+    //private boolean active;
 
     public Magess(String url, String name) throws MalformedURLException {
         URL carUrl = new URL(url);
         this.url = carUrl;
-        this.name = name;
-        active = true;
+        //this.name = name;
+        //active = true;
     }
     public void setUrl(URL url){
         this.url = url;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
+//    public void setName(String name) {
+//        this.name = name;
+//    }
 
     public URL getUrl(){
         return this.url;

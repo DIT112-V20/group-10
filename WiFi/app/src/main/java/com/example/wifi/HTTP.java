@@ -34,8 +34,8 @@ public class HTTP {
             public void onResponse(@NotNull Call call, @NotNull Response response) throws IOException {
                 if(response.isSuccessful()){
                     Log.d("AA", "resp [" + response.body().string() + "]");
-
                 }
+                System.out.println(response.code());
 
 
             }

@@ -26,7 +26,7 @@ public class ManualControlActivity extends AppCompatActivity {
         forward.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                RequestHelper.requestToServer("F");
+                RequestHelper.requestToServer("/F");
                 Toast.makeText(getApplicationContext(),"Going forward..", Toast.LENGTH_SHORT).show();
             }
         });
@@ -34,7 +34,7 @@ public class ManualControlActivity extends AppCompatActivity {
         backward.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
-                RequestHelper.requestToServer("B");
+                RequestHelper.requestToServer("/B");
                 Toast.makeText(getApplicationContext(),"Going backward", Toast.LENGTH_SHORT).show();
             }
         });
@@ -43,7 +43,7 @@ public class ManualControlActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                RequestHelper.requestToServer("L");
+                RequestHelper.requestToServer("/L");
                 Toast.makeText(getApplicationContext(),"Going left", Toast.LENGTH_SHORT).show();
             }
         });
@@ -51,7 +51,7 @@ public class ManualControlActivity extends AppCompatActivity {
         right.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                RequestHelper.requestToServer("R");
+                RequestHelper.requestToServer("/R");
                 Toast.makeText(getApplicationContext(),"Going right", Toast.LENGTH_SHORT).show();
             }
         });
@@ -59,7 +59,7 @@ public class ManualControlActivity extends AppCompatActivity {
         stop.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                RequestHelper.requestToServer("S");
+                RequestHelper.requestToServer("/S");
                 Toast.makeText(getApplicationContext(),"Stopping", Toast.LENGTH_SHORT).show();
             }
         });
