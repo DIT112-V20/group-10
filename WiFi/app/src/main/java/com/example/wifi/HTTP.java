@@ -35,7 +35,7 @@ public class HTTP {
                 if(response.isSuccessful()){
                     Log.d("AA", "resp [" + response.body().string() + "]");
                 }
-                System.out.println(response.code());
+                System.out.println("My response is " + response.code());
 
 
             }

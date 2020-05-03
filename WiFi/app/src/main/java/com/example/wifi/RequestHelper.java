@@ -13,7 +13,7 @@ public class RequestHelper {
 
     static {
         try {
-            magess = new Magess("http://192.168.0.5:80", "Magess");
+            magess = new Magess("http://192.168.0.5/", "Magess");
         } catch (MalformedURLException e) {
             e.printStackTrace();
         }
