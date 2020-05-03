@@ -13,7 +13,8 @@ public class RequestHelper {
 
     static {
         try {
-            magess = new Magess("http://192.168.0.5:80", "Magess");
+            //Ip address when Gus device is connected.
+            magess = new Magess("http://192.168.43.40:80", "Magess");
         } catch (MalformedURLException e) {
             e.printStackTrace();
         }
