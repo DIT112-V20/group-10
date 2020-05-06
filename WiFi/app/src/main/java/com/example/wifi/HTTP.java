@@ -1,11 +1,13 @@
 package com.example.wifi;
 
+import android.os.Handler;
 import android.util.Log;
 import android.widget.Toast;
 
 import org.jetbrains.annotations.NotNull;
 
 import java.io.IOException;
+import java.util.Objects;
 
 import okhttp3.Call;
 import okhttp3.Callback;
@@ -28,20 +30,24 @@ public class HTTP {
                 //System.out.println("My Url is " + url);
                 //Log.i("My URL is ", url);
                 e.printStackTrace();
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        // Magic here
+                    }
+                }, 1000); // Millisec
             }
 
             @Override
             public void onResponse(@NotNull Call call, @NotNull Response response) throws IOException {
                 if(response.isSuccessful()){
-                    Log.d("AA", "resp [" + response.body().string() + "]");
+                    Log.d("AA", "resp [" + Objects.requireNonNull(response.body()).string() + "]");
                 }
-                System.out.println("My response is " + response.code());
 
-
+                Log.i("The response code is " , String.valueOf(response.code()));
             }
 
         });
-
     }
 
 
