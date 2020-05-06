@@ -2,6 +2,7 @@
 #include <Wire.h>
 #include <VL53L0X.h>
 #include <WiFi.h>
+#include <ESPmDNS.h>
 
 char input;
 int forwardSpeed = 40;
@@ -17,7 +18,7 @@ int currentSpeed;
 const unsigned long PRINT_INTERVAL = 100;
 unsigned long previousPrintout = 0;
 const auto pulsesPerMeter = 600;
-const char* ssid     =  "ssidname";
+const char* ssid     =  "ssid";
 const char* password = "password";
 WiFiServer server(80);
 
@@ -58,6 +59,11 @@ void setup() {
     Serial.println("WiFi connected.");
     Serial.println("IP address: ");
     Serial.println(WiFi.localIP());
+
+    if (MDNS.begin("smartcar")) {
+
+      Serial.println("hey its working");
+    }
     
     server.begin();
    
@@ -77,6 +83,7 @@ void setup() {
 int value = 0;
 
 void loop() {
+   
    Serial.println(sensor.readRangeContinuousMillimeters());
     Serial.println();
     WiFiClient client = server.available();   // listen for incoming clients
