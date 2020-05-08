@@ -9,17 +9,18 @@ int forwardSpeed = 40;
 int backSpeed = -40;
 int brake = 0;
 int millimeterLimit = 200;
-int lDegrees = -10; // degrees to turn left
-int rDegrees = 10;  // degrees to turn right
+int lDegrees = -20; // degrees to turn left
+int rDegrees = 20;  // degrees to turn right
 int accelerate = 10;
 int decelerate = -10;
 int diffSpeed = 5;
 int currentSpeed;
+bool automaticDriving;
 const unsigned long PRINT_INTERVAL = 100;
 unsigned long previousPrintout = 0;
 const auto pulsesPerMeter = 600;
-const char* ssid     =  "ssid";
-const char* password = "password";
+const char* ssid     =  "AndroidAP";
+const char* password = "arwy0176";
 WiFiServer server(80);
 
 BrushedMotor leftMotor(smartcarlib::pins::v2::leftMotorPins);
@@ -111,7 +112,8 @@ void loop() {
             client.print("Click <a href=\"/L\">here</a> to turn left with the car.<br>");
             client.print("Click <a href=\"/R\">here</a> to turn right with the car.<br>");
             client.print("Click <a href=\"/B\">here</a> to go backwards with the car.<br>");
-            
+            client.print("Click <a href=\"/automatic_driving\">here</a> to have automatic driving .<br>");
+            client.print("Click <a href=\"/automatic_driving_stop\">here</a> to stop automatic driving . <br>");
 
             // The HTTP response ends with another blank line:
             client.println();
@@ -142,12 +144,35 @@ void loop() {
           car.setAngle(rDegrees);
           car.setSpeed(forwardSpeed);             // GET /R makes the car go to the right
         }
+        if (currentLine.endsWith("GET /automatic_driving")) {
+          automaticDriving = true;
+          while (automaticDriving) {
+          car.setSpeed(forwardSpeed);
+          if (sensor.readRangeContinuousMillimeters() < 250) {
+            car.setSpeed(-15);
+            delay(3000);
+            car.setAngle(rDegrees);
+            car.setSpeed(30);
+            delay(3000);
+            car.setAngle(lDegrees);
+            car.setSpeed(30);
+            delay(5000);
+            car.setAngle(10);
+            delay(1000);
+            car.setAngle(0);
+          }
+          }
+
+        }
+        if (currentLine.endsWith("GET /automatic_driving_stop")) { 
+          automaticDriving = false;
+          car.setSpeed(0);
+        }
+
          if(sensor.readRangeContinuousMillimeters()< 250){
-        car.setSpeed(0);
-        delay(500);
-        car.setSpeed(-10);
-        delay(3000);
-        car.setSpeed(0);
+          car.setSpeed(-10);
+          delay(3000);
+          car.setSpeed(0);
         }
       }
     }
