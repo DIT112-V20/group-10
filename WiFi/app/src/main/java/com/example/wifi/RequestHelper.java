@@ -13,7 +13,7 @@ public class RequestHelper {
 
     static {
         try {
-            magess = new Magess("http://192.168.43.40", "Magess");
+            magess = new Magess("http://magess.local", "Magess");
            //Ip address when Gus device is connected.
             //magess = new Magess("http://192.168.43.40:80", "Magess");
         } catch (MalformedURLException e) {
@@ -21,8 +21,8 @@ public class RequestHelper {
         }
     }
 
-    public static void requestToServer(String command) {
-        server.request(magess.getUrl().toString() + command);
+    public static boolean requestToServer(String command) {
+       return server.request(magess.getUrl().toString() + command);
     }
 
 }
