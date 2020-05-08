@@ -60,9 +60,9 @@ void setup() {
     Serial.println("IP address: ");
     Serial.println(WiFi.localIP());
 
-    if (MDNS.begin("smartcar")) {
+    if (MDNS.begin("magess")) {
 
-      Serial.println("hey its working");
+      Serial.println("magess.local is up");
     }
     
     server.begin();
@@ -111,8 +111,7 @@ void loop() {
             client.print("Click <a href=\"/L\">here</a> to turn left with the car.<br>");
             client.print("Click <a href=\"/R\">here</a> to turn right with the car.<br>");
             client.print("Click <a href=\"/B\">here</a> to go backwards with the car.<br>");
-            client.print("Click <a href=\"/A\">here</a> to increase car-speed.<br>");
-            client.print("Click <a href=\"/D\">here</a> to decrease car-speed.<br>");
+            
 
             // The HTTP response ends with another blank line:
             client.println();
@@ -143,12 +142,6 @@ void loop() {
           car.setAngle(rDegrees);
           car.setSpeed(forwardSpeed);             // GET /R makes the car go to the right
         }
-        if (currentLine.endsWith("GET /A")) {
-          car.setSpeed(accelerate);           // GET /A makes the car accelerate
-        }
-        if (currentLine.endsWith("GET /D")) {
-          car.setSpeed(decelerate);           // GET /D makes the car decelerate
-        }
          if(sensor.readRangeContinuousMillimeters()< 250){
         car.setSpeed(0);
         delay(500);
@@ -162,6 +155,5 @@ void loop() {
       }
     // close the connection:
     client.stop();
-    Serial.println("Client Disconnected.");
     }
     
