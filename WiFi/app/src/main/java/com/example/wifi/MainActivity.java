@@ -26,17 +26,22 @@ public class MainActivity extends AppCompatActivity {
             @Override
 
             public void onClick(View v) {
+
                 RequestHelper.requestToServer("");
                 //Toast.makeText(getApplicationContext(), "Response code "+ String.valueOf(requestStatus) ,Toast.LENGTH_SHORT).show();
                 //server.request(Cars.magess.getUrl().toString());
-                openActivitySecond();
-                //Toast.makeText(getApplicationContext(),"Not connected",Toast.LENGTH_SHORT).show();
+                //
+                    openActivitySecond();
+//                }else{
+//                    Toast.makeText(getApplicationContext(),"Not connected",Toast.LENGTH_SHORT).show();
+//                }
             }
         });
     }
     public void openActivitySecond() {
-        Intent intent = new Intent(this, ManualControlActivity.class);
+        Intent intent = new Intent(MainActivity.this, ManualControlActivity.class);
         startActivity(intent);
+
     }
 
 

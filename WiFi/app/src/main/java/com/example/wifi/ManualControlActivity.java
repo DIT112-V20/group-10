@@ -15,8 +15,10 @@ public class ManualControlActivity extends AppCompatActivity {
     ImageButton left;
     ImageButton right;
     ImageButton stop;
+    boolean request = false;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_manual_control);
 
@@ -27,7 +29,10 @@ public class ManualControlActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 RequestHelper.requestToServer("/F");
-                Toast.makeText(getApplicationContext(),"Going forward..", Toast.LENGTH_SHORT).show();
+
+                    Toast.makeText(getApplicationContext(),"Going forward..", Toast.LENGTH_SHORT).show();
+
+
             }
         });
 
@@ -35,7 +40,10 @@ public class ManualControlActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 RequestHelper.requestToServer("/B");
-                Toast.makeText(getApplicationContext(),"Going backward", Toast.LENGTH_SHORT).show();
+
+                    Toast.makeText(getApplicationContext(),"Going backward", Toast.LENGTH_SHORT).show();
+
+
             }
         });
 
@@ -45,6 +53,8 @@ public class ManualControlActivity extends AppCompatActivity {
 
                 RequestHelper.requestToServer("/L");
                 Toast.makeText(getApplicationContext(),"Going left", Toast.LENGTH_SHORT).show();
+
+
             }
         });
 
@@ -52,7 +62,9 @@ public class ManualControlActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 RequestHelper.requestToServer("/R");
-                Toast.makeText(getApplicationContext(),"Going right", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(),"Going right", Toast.LENGTH_SHORT).show();
+
+
             }
         });
 
@@ -60,7 +72,10 @@ public class ManualControlActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 RequestHelper.requestToServer("/S");
-                Toast.makeText(getApplicationContext(),"Stopping", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), "Stopping", Toast.LENGTH_SHORT).show();
+
+
+
             }
         });
 
@@ -68,11 +83,11 @@ public class ManualControlActivity extends AppCompatActivity {
     }
 
     private void buttonsInitializer() {
-        forward  = (ImageButton) findViewById(R.id.forward);
-        backward = (ImageButton) findViewById(R.id.backward);
-        left     = (ImageButton) findViewById(R.id.left);
-        right    = (ImageButton) findViewById(R.id.right);
-        stop     = (ImageButton) findViewById(R.id.stop);
+        forward  = findViewById(R.id.forward);
+        backward = findViewById(R.id.backward);
+        left     = findViewById(R.id.left);
+        right    = findViewById(R.id.right);
+        stop     = findViewById(R.id.stop);
 
     }
 }
