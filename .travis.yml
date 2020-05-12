@@ -15,8 +15,8 @@ env:
   #  - DOXYFILE: $TRAVIS_BUILD_DIR/Doxyfile
 
 before_install:
-   - source $TRAVIS_BUILD_DIR/install.sh
-
+   - source <(curl -SLs https://raw.githubusercontent.com/adafruit/travis-ci-arduino/master/install.sh)
+   
 install:
    - arduino --install-library "Smartcar shield"
    - arduino --install-library "VL53L0X"
