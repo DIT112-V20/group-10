@@ -9,10 +9,7 @@ git:
   quiet: true
 env:
   global:
-    - ARDUINO_IDE_VERSION="1.8.11"
-     - PRETTYNAME="Adafruit FT6206 Arduino Library"
-# Optional, will default to "$TRAVIS_BUILD_DIR/Doxyfile"
-  #  - DOXYFILE: $TRAVIS_BUILD_DIR/Doxyfile
+    - ARDUINO_IDE_VERSION="1.8.12"
 
 before_install:
    - source <(curl -SLs https://raw.githubusercontent.com/adafruit/travis-ci-arduino/master/install.sh)
@@ -22,6 +19,7 @@ install:
    - arduino --install-library "VL53L0X"
    - arduino --install-library "ESP32 AnalogWrite"
    - arduino --install-library "ServoESP32"
+   - arduino --install-library "WifiLocation"
 
 script:
    - build_platform esp32
