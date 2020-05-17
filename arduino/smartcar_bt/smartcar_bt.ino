@@ -4,23 +4,28 @@
 #include <WiFi.h>
 #include <ESPmDNS.h>
 
+#include <WebServer.h>
+#include <Arduino_JSON.h>
+#include <WifiLocation.h>
+
 char input;
 int forwardSpeed = 40;
 int backSpeed = -40;
 int brake = 0;
-int millimeterLimit = 200;
-int lDegrees = -20; // degrees to turn left
-int rDegrees = 20;  // degrees to turn right
-int accelerate = 10;
-int decelerate = -10;
-int diffSpeed = 5;
-int currentSpeed;
-bool automaticDriving;
+int millimeterLimit = 250;
+int lDegrees = -70; // degrees to turn left
+int rDegrees = 70;  // degrees to turn right
+
 const unsigned long PRINT_INTERVAL = 100;
 unsigned long previousPrintout = 0;
 const auto pulsesPerMeter = 600;
-const char* ssid     =  "ssid";
-const char* password = "password";
+
+const char* ssid     =  "SSID";
+const char* password = "PASS";
+const char* googleApiKey = "APIKEY";
+
+
+WifiLocation location(googleApiKey);
 WiFiServer server(80);
 
 BrushedMotor leftMotor(smartcarlib::pins::v2::leftMotorPins);
@@ -41,20 +46,33 @@ SmartCar car(control, gyroscope, leftOdometer, rightOdometer);
 VL53L0X sensor;
 
 void setup() {
-  Serial.begin(9600);
+  Serial.begin(115200);
   Wire.begin();
   sensor.setTimeout(500);
+
+    WiFi.mode(WIFI_MODE_STA);
+    WiFi.begin(ssid, password);
   
- Serial.println();
-    Serial.println();
+    Serial.println("");
     Serial.print("Connecting to ");
     Serial.println(ssid);
     WiFi.begin(ssid, password);
     
     while (WiFi.status() != WL_CONNECTED) {
         delay(500);
-        Serial.print(".");
+        Serial.print("Attempting to connect to WPA SSID: ");
+        Serial.println(ssid);
+         Serial.print("Status = ");
+        Serial.println(WiFi.status());
     }
+
+    location_t loc2 = location.getGeoFromWiFi();
+
+    Serial.println("Location request data");
+    Serial.println(location.getSurroundingWiFiJson());
+    Serial.println("Latitude: " + String(loc2.lat, 7));
+    Serial.println("Longitude: " + String(loc2.lon, 7));
+    Serial.println("Accuracy: " + String(loc2.accuracy));
 
     Serial.println("");
     Serial.println("WiFi connected.");
@@ -84,7 +102,7 @@ void setup() {
 int value = 0;
 
 void loop() {
-   
+  
    Serial.println(sensor.readRangeContinuousMillimeters());
     Serial.println();
     WiFiClient client = server.available();   // listen for incoming clients
@@ -107,72 +125,68 @@ void loop() {
             client.println();
 
             // the content of the HTTP response follows the header:
-            client.print("Click <a href=\"/F\">here</a> to turn on the car.<br>");
-            client.print("Click <a href=\"/S\">here</a> to turn off the car.<br>");
-            client.print("Click <a href=\"/L\">here</a> to turn left with the car.<br>");
-            client.print("Click <a href=\"/R\">here</a> to turn right with the car.<br>");
-            client.print("Click <a href=\"/B\">here</a> to go backwards with the car.<br>");
-            client.print("Click <a href=\"/automatic_driving\">here</a> to have automatic driving .<br>");
-            client.print("Click <a href=\"/automatic_driving_stop\">here</a> to stop automatic driving . <br>");
-
+            client.print("Click <a href=\"/F\">here</a> to make the car go forward.<br>");
+            client.print("Click <a href=\"/S\">here</a> to stop the car.<br>");
+            client.print("Click <a href=\"/L\">here</a> to make the car go left.<br>");
+            client.print("Click <a href=\"/R\">here</a> to make the car go right.<br>");
+            client.print("Click <a href=\"/B\">here</a> to make the car go backwards.<br>");
+            client.print("Click <a href=\"/M\">here</a> to get the car's location.<br>");
+            
             // The HTTP response ends with another blank line:
             client.println();
             // break out of the while loop:
             break;
+            
           } else {    // if you got a newline, then clear currentLine:
             currentLine = "";
           }
         } else if (c != '\r') {  // if you got anything else but a carriage return character,
           currentLine += c;      // add it to the end of the currentLine
         }
-        // Check to see if the client request was "GET /F" or "GET /S":
+        // Check to see what the client request consist of:
         if (currentLine.endsWith("GET /F")) {
+          delay(500);
           car.setSpeed(forwardSpeed);         // GET /F makes the car run forward
         }
         if (currentLine.endsWith("GET /S")) {
+          delay(500);  
           car.setSpeed(brake);                // GET /S makes the car stop
         }
         if (currentLine.endsWith("GET /B")) {
+          delay(500); 
           car.setSpeed(backSpeed);            // GET /B makes the car go backward
         }
         if (currentLine.endsWith("GET /L")){
+          delay(500); 
           car.setAngle(lDegrees); 
+          delay(2500);
           car.setSpeed(forwardSpeed); 
                                               // GET /L makes the car go to the left
         }
         if (currentLine.endsWith("GET /R")) {
+          delay(500); 
           car.setAngle(rDegrees);
+          delay(2500);
           car.setSpeed(forwardSpeed);             // GET /R makes the car go to the right
         }
-        if (currentLine.endsWith("GET /automatic_driving")) {
-          automaticDriving = true;
-          while (automaticDriving) {
-          car.setSpeed(forwardSpeed);
-          if (sensor.readRangeContinuousMillimeters() < 250) {
-            car.setSpeed(-15);
-            delay(3000);
-            car.setAngle(rDegrees);
-            car.setSpeed(30);
-            delay(3000);
-            car.setAngle(lDegrees);
-            car.setSpeed(30);
-            delay(5000);
-            car.setAngle(10);
-            delay(1000);
-            car.setAngle(0);
-          }
-          }
-
+        if (currentLine.endsWith("GET /M")){
+        location_t loc = location.getGeoFromWiFi();
+          client.print("Lat: " + String(loc.lat, 7));
+          client.print(" Lon: " + String(loc.lon, 7));
+         
         }
-        if (currentLine.endsWith("GET /automatic_driving_stop")) { 
-          automaticDriving = false;
-          car.setSpeed(0);
-        }
-
-         if(sensor.readRangeContinuousMillimeters()< 250){
-          car.setSpeed(-10);
-          delay(3000);
-          car.setSpeed(0);
+         if(sensor.readRangeContinuousMillimeters()< millimeterLimit){
+        car.setSpeed(brake);              // stop,
+        delay(500);                       // wait,
+        car.setSpeed(backSpeed);          // go backwards
+        delay(2000);                      // for 2 secs,
+        car.setSpeed(brake);              // brake,
+        delay(1500);                      // wait 1,5 secs,
+        car.setAngle(lDegrees);           // turn left,
+        car.setSpeed(forwardSpeed);       // go forward
+        delay(2500);                      // for 2,5 secs,
+        car.setSpeed(brake);              // brake.
+        break;
         }
       }
     }
@@ -181,4 +195,3 @@ void loop() {
     // close the connection:
     client.stop();
     }
-    
