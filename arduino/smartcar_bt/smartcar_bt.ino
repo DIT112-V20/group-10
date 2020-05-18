@@ -10,11 +10,12 @@
 
 char input;
 int forwardSpeed = 40;
-int backSpeed = -20;
+int backSpeed = -30;
 int brake = 0;
 int millimeterLimit = 250;
-int lDegrees = -70; // degrees to turn left
-int rDegrees = 70;  // degrees to turn right
+int lDegrees = -60; // degrees to turn left
+int rDegrees = 60;  // degrees to turn right
+int straight = 0;  // going straight
 
 const unsigned long PRINT_INTERVAL = 100;
 unsigned long previousPrintout = 0;
@@ -146,14 +147,17 @@ void loop() {
         // Check to see what the client request consist of:
         if (currentLine.endsWith("GET /F")) {
           delay(500);
+          car.setAngle(straight);
           car.setSpeed(forwardSpeed);         // GET /F makes the car run forward
         }
         if (currentLine.endsWith("GET /S")) {
-          delay(500);  
+          delay(500);
+          car.setAngle(straight);  
           car.setSpeed(brake);                // GET /S makes the car stop
         }
         if (currentLine.endsWith("GET /B")) {
-          delay(500); 
+          delay(500);
+          car.setAngle(straight); 
           car.setSpeed(backSpeed);            // GET /B makes the car go backward
         }
         if (currentLine.endsWith("GET /L")){
@@ -183,7 +187,7 @@ void loop() {
         delay(2000);                      // for 2 secs,
         car.setSpeed(brake);              // brake,
         delay(500);                      // wait 0,5 secs,
-        car.setAngle(50);                 // turn left,
+        car.setAngle(50);                 // turn right,
         car.setSpeed(forwardSpeed);       // go forward
         delay(1500);                      // for 2,5 secs,
         car.setSpeed(brake);              // brake.
