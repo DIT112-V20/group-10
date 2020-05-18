@@ -16,14 +16,15 @@ int millimeterLimit = 250;
 int lDegrees = -60; // degrees to turn left
 int rDegrees = 60;  // degrees to turn right
 int straight = 0;  // going straight
+int changeSpeed = 15;
 
 const unsigned long PRINT_INTERVAL = 100;
 unsigned long previousPrintout = 0;
 const auto pulsesPerMeter = 600;
 
-const char* ssid     =  "SSID";
-const char* password = "PASS";
-const char* googleApiKey = "APIKEY";
+const char* ssid     =  "ssid";
+const char* password = "password";
+const char* googleApiKey = "apikey";
 
 
 WifiLocation location(googleApiKey);
@@ -132,6 +133,8 @@ void loop() {
             client.print("Click <a href=\"/R\">here</a> to make the car go right.<br>");
             client.print("Click <a href=\"/B\">here</a> to make the car go backwards.<br>");
             client.print("Click <a href=\"/M\">here</a> to get the car's location.<br>");
+            client.print("Click <a href=\"/A\">here</a> to make the car go faster.<br>");
+            client.print("Click <a href=\"/C\">here</a> to make the car go slower.<br>");
             
             // The HTTP response ends with another blank line:
             client.println();
@@ -149,22 +152,30 @@ void loop() {
           delay(500);
           car.setAngle(straight);
           car.setSpeed(forwardSpeed);         // GET /F makes the car run forward
+          delay(500);
+          Serial.println(sensor.readRangeContinuousMillimeters());
         }
         if (currentLine.endsWith("GET /S")) {
           delay(500);
           car.setAngle(straight);  
           car.setSpeed(brake);                // GET /S makes the car stop
+          delay(500);
+          Serial.println(sensor.readRangeContinuousMillimeters());
         }
         if (currentLine.endsWith("GET /B")) {
           delay(500);
           car.setAngle(straight); 
           car.setSpeed(backSpeed);            // GET /B makes the car go backward
+          delay(500);
+          Serial.println(sensor.readRangeContinuousMillimeters());
         }
         if (currentLine.endsWith("GET /L")){
           delay(500); 
           car.setAngle(lDegrees); 
           delay(2500);
           car.setSpeed(forwardSpeed);
+          delay(500);
+          Serial.println(sensor.readRangeContinuousMillimeters());
           break;                                  // GET /L makes the car go to the left
         }
         if (currentLine.endsWith("GET /R")) {
@@ -172,17 +183,32 @@ void loop() {
           car.setAngle(rDegrees);
           delay(2500);
           car.setSpeed(forwardSpeed);
+          delay(500);
+          Serial.println(sensor.readRangeContinuousMillimeters());
           break;                              // GET /R makes the car go to the right
         }
         if (currentLine.endsWith("GET /M")){
         location_t loc = location.getGeoFromWiFi();
-          client.print("");
-          client.print("Lat: " + String(loc.lat, 7));
-          client.print("");
-          client.print("Lon: " + String(loc.lon, 7));
-          client.print("");
+        client.print("Lat: " + String(loc.lat, 7) + "\n");
+       
+        client.print("Lon: " + String(loc.lon, 7) + "\n");
+        
          
         }
+         if (currentLine.endsWith("GET /A")){
+          delay(500);
+          car.setSpeed(forwardSpeed + changeSpeed);
+          delay(500);
+          Serial.println(sensor.readRangeContinuousMillimeters());
+          break;
+         }
+         if (currentLine.endsWith("GET /C")){
+          delay(500);
+          car.setSpeed(forwardSpeed - changeSpeed);
+          delay(500);
+          Serial.println(sensor.readRangeContinuousMillimeters());
+          break;
+         }
          if(sensor.readRangeContinuousMillimeters()< millimeterLimit){
         car.setSpeed(brake);              // stop,
         delay(500);                       // wait,
@@ -192,6 +218,8 @@ void loop() {
         delay(500);                      // wait 0,5 secs,
         car.setAngle(50);                 // turn right,
         car.setSpeed(forwardSpeed);       // go forward
+        delay(500);
+        Serial.println(sensor.readRangeContinuousMillimeters());
         delay(1500);                      // for 2,5 secs,
         break;
         }
