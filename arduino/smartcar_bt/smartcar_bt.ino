@@ -176,8 +176,11 @@ void loop() {
         }
         if (currentLine.endsWith("GET /M")){
         location_t loc = location.getGeoFromWiFi();
+          client.print("");
           client.print("Lat: " + String(loc.lat, 7));
-          client.print(" Lon: " + String(loc.lon, 7));
+          client.print("");
+          client.print("Lon: " + String(loc.lon, 7));
+          client.print("");
          
         }
          if(sensor.readRangeContinuousMillimeters()< millimeterLimit){
@@ -190,7 +193,6 @@ void loop() {
         car.setAngle(50);                 // turn right,
         car.setSpeed(forwardSpeed);       // go forward
         delay(1500);                      // for 2,5 secs,
-        car.setSpeed(brake);              // brake.
         break;
         }
       }
