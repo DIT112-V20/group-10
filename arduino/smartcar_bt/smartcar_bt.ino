@@ -10,7 +10,7 @@
 
 char input;
 int forwardSpeed = 40;
-int backSpeed = -40;
+int backSpeed = -20;
 int brake = 0;
 int millimeterLimit = 250;
 int lDegrees = -70; // degrees to turn left
@@ -160,14 +160,15 @@ void loop() {
           delay(500); 
           car.setAngle(lDegrees); 
           delay(2500);
-          car.setSpeed(forwardSpeed); 
-                                              // GET /L makes the car go to the left
+          car.setSpeed(forwardSpeed);
+          break;                                  // GET /L makes the car go to the left
         }
         if (currentLine.endsWith("GET /R")) {
           delay(500); 
           car.setAngle(rDegrees);
           delay(2500);
-          car.setSpeed(forwardSpeed);             // GET /R makes the car go to the right
+          car.setSpeed(forwardSpeed);
+          break;                              // GET /R makes the car go to the right
         }
         if (currentLine.endsWith("GET /M")){
         location_t loc = location.getGeoFromWiFi();
@@ -181,10 +182,10 @@ void loop() {
         car.setSpeed(backSpeed);          // go backwards
         delay(2000);                      // for 2 secs,
         car.setSpeed(brake);              // brake,
-        delay(1500);                      // wait 1,5 secs,
-        car.setAngle(lDegrees);           // turn left,
+        delay(500);                      // wait 0,5 secs,
+        car.setAngle(50);                 // turn left,
         car.setSpeed(forwardSpeed);       // go forward
-        delay(2500);                      // for 2,5 secs,
+        delay(1500);                      // for 2,5 secs,
         car.setSpeed(brake);              // brake.
         break;
         }
