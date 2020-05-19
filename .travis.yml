@@ -21,7 +21,6 @@ install:
    - arduino --install-library "ServoESP32"
    - arduino --install-library "WifiLocation"
    - arduino --install-library "Arduino_JSON"
-   - arduino --install-library "ESPmDNS"
 script:
    - build_platform esp32
 
