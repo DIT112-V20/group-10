@@ -20,7 +20,7 @@ install:
    - arduino --install-library "ESP32 AnalogWrite"
    - arduino --install-library "ServoESP32"
    - arduino --install-library "WifiLocation"
-
+   - arduino --install-library "Arduino_JSON"
 script:
    - build_platform esp32
 
