@@ -11,8 +11,9 @@
 char input;
 int forwardSpeed = 40;
 int backSpeed = -30;
+int turningSpeed= 35;
 int brake = 0;
-int millimeterLimit = 250;
+int millimeterLimit = 350;
 int lDegrees = -60; // degrees to turn left
 int rDegrees = 60;  // degrees to turn right
 int straight = 0;  // going straight
@@ -23,8 +24,8 @@ unsigned long previousPrintout = 0;
 const auto pulsesPerMeter = 600;
 
 const char* ssid     =  "ssid";
-const char* password = "pass";
-const char* googleApiKey = "APIkey";
+const char* password = "password";
+const char* googleApiKey = "apikey";
 
 
 WifiLocation location(googleApiKey);
@@ -149,114 +150,74 @@ void loop() {
           currentLine += c;      // add it to the end of the currentLine
         }
         // Check to see what the client request consist of:
+        if(sensor.readRangeContinuousMillimeters()< millimeterLimit){ 
+        car.setSpeed(brake);              // stop,
+        delay(500);                       // wait 0,5 secs,
+        car.setSpeed(backSpeed);          // go backwards
+        delay(2000);                      // for 2 secs,
+        car.setSpeed(brake);              // brake,
+        delay(500);                       // wait 0,5 secs,
+        car.setAngle(70);                 // turn right 70 degrees,
+        car.setSpeed(forwardSpeed);       // go forward
+        delay(500);
+        car.setAngle(straight);
+        }
         if (currentLine.endsWith("GET /F")) {
-          delay(500);
           car.setAngle(straight);
-          car.setSpeed(forwardSpeed);         // GET /F makes the car run forward
-          delay(500);
+          car.setSpeed(forwardSpeed);                                         // GET /F makes the car run forward
           Serial.println(sensor.readRangeContinuousMillimeters());
         }
         if (currentLine.endsWith("GET /S")) {
-          delay(500);
           car.setAngle(straight);
-          car.setSpeed(brake);                // GET /S makes the car stop
-          delay(500);
+          car.setSpeed(brake);                                                // GET /S makes the car stop
           Serial.println(sensor.readRangeContinuousMillimeters());
         }
         if (currentLine.endsWith("GET /B")) {
+          car.setSpeed(brake);
           delay(500);
           car.setAngle(straight);
-          car.setSpeed(backSpeed);            // GET /B makes the car go backward
-          delay(500);
-          Serial.println(sensor.readRangeContinuousMillimeters());
+          car.setSpeed(backSpeed);                                             // GET /B makes the car go backward
         }
         if (currentLine.endsWith("GET /L")){
-          delay(500);
           car.setAngle(lDegrees);
+          car.setSpeed(turningSpeed);
           delay(2500);
+          car.setAngle(straight);
           car.setSpeed(forwardSpeed);
-          delay(500);
-          Serial.println(sensor.readRangeContinuousMillimeters());
-          break;                                  // GET /L makes the car go to the left
+                                                                               // GET /L makes the car go to the left
         }
         if (currentLine.endsWith("GET /R")) {
-          delay(500);
           car.setAngle(rDegrees);
+          car.setSpeed(turningSpeed);
           delay(2500);
+          car.setAngle(straight);
           car.setSpeed(forwardSpeed);
-          delay(500);
-          Serial.println(sensor.readRangeContinuousMillimeters());
-          break;                              // GET /R makes the car go to the right
+                                                                               // GET /R makes the car go to the right
         }
         if (currentLine.endsWith("GET /M")){
         location_t loc = location.getGeoFromWiFi();
         client.print("Lat: " + String(loc.lat, 7) + "\n");
-
-        client.print("Lon: " + String(loc.lon, 7) + "\n");
+        client.print("Lon: " + String(loc.lon, 7) + "\n");                     // GET /M prints the location of the car
 
         }
          if (currentLine.endsWith("GET /A")){
-          delay(500);
           car.setSpeed(forwardSpeed + changeSpeed);
-          delay(500);
-          Serial.println(sensor.readRangeContinuousMillimeters());
-          break;                                 // GET /A makes the car accelerate
+                                                                               // GET /A makes the car accelerate
          }
          if (currentLine.endsWith("GET /D")){
-          delay(500);
           car.setSpeed(forwardSpeed - changeSpeed);
-          delay(500);
-          Serial.println(sensor.readRangeContinuousMillimeters());
-          break;                                // GET /D makes the car decelerate
+                                                                               // GET /D makes the car decelerate
          }
-         if(sensor.readRangeContinuousMillimeters()< millimeterLimit){
-        car.setSpeed(brake);              // stop,
-        delay(500);                       // wait,
-        car.setSpeed(backSpeed);          // go backwards
-        delay(2000);                      // for 2 secs,
-        car.setSpeed(brake);              // brake,
-        delay(500);                      // wait 0,5 secs,
-        car.setAngle(70);                 // turn right,
-        car.setSpeed(forwardSpeed);       // go forward
-        delay(500);
-        Serial.println(sensor.readRangeContinuousMillimeters());
-        delay(1500);                      // for 2,5 secs,
-        car.setAngle(straight);
-        delay(500);
-        break;
-        }
         if (currentLine.endsWith("GET /G")){
           
           while (sensor.readRangeContinuousMillimeters()> millimeterLimit) {
-          delay(500);
+          car.setSpeed(forwardSpeed);                                          // GET /G makes the car run automatically
           car.setAngle(straight);
-          car.setSpeed(forwardSpeed);         // GET /G makes the car run automatically
-          delay(500);
-          Serial.println(sensor.readRangeContinuousMillimeters());
-          delay(500);
-
-        if(sensor.readRangeContinuousMillimeters()< millimeterLimit) {
-          car.setSpeed(brake);              // stop,
-          delay(500);                       // wait,
-          car.setSpeed(backSpeed);          // go backwards
-          delay(2000);                      // for 2 secs,
-          car.setSpeed(brake);              // brake,
-          delay(500);                      // wait 0,5 secs,
-          car.setAngle(70);                 // turn right,
-          car.setSpeed(forwardSpeed);       // go forward
-          delay(500);
-          Serial.println(sensor.readRangeContinuousMillimeters());
-          delay(1500);                      // for 1,5 secs,
-          car.setAngle(straight);
-          delay(500);
-        break;
-        }
           }
-        }
-
     }
   }
   }
     // close the connection:
     client.stop();
-}
+    }
+    }
