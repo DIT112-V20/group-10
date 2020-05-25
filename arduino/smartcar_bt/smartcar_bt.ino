@@ -152,31 +152,31 @@ void loop() {
         // Check to see what the client request consist of:
         if(sensor.readRangeContinuousMillimeters()< millimeterLimit){ 
         car.setSpeed(brake);              // stop,
-        delay(500);                       // wait,
+        delay(500);                       // wait 0,5 secs,
         car.setSpeed(backSpeed);          // go backwards
         delay(2000);                      // for 2 secs,
         car.setSpeed(brake);              // brake,
-        delay(500);                      // wait 0,5 secs,
-        car.setAngle(70);                 // turn right,
+        delay(500);                       // wait 0,5 secs,
+        car.setAngle(70);                 // turn right 70 degrees,
         car.setSpeed(forwardSpeed);       // go forward
         delay(500);
         car.setAngle(straight);
         }
         if (currentLine.endsWith("GET /F")) {
           car.setAngle(straight);
-          car.setSpeed(forwardSpeed);         // GET /F makes the car run forward
+          car.setSpeed(forwardSpeed);                                         // GET /F makes the car run forward
           Serial.println(sensor.readRangeContinuousMillimeters());
         }
         if (currentLine.endsWith("GET /S")) {
           car.setAngle(straight);
-          car.setSpeed(brake);                // GET /S makes the car stop
+          car.setSpeed(brake);                                                // GET /S makes the car stop
           Serial.println(sensor.readRangeContinuousMillimeters());
         }
         if (currentLine.endsWith("GET /B")) {
           car.setSpeed(brake);
           delay(500);
           car.setAngle(straight);
-          car.setSpeed(backSpeed);            // GET /B makes the car go backward
+          car.setSpeed(backSpeed);                                             // GET /B makes the car go backward
         }
         if (currentLine.endsWith("GET /L")){
           car.setAngle(lDegrees);
@@ -184,7 +184,7 @@ void loop() {
           delay(2500);
           car.setAngle(straight);
           car.setSpeed(forwardSpeed);
-                              // GET /L makes the car go to the left
+                                                                               // GET /L makes the car go to the left
         }
         if (currentLine.endsWith("GET /R")) {
           car.setAngle(rDegrees);
@@ -192,27 +192,26 @@ void loop() {
           delay(2500);
           car.setAngle(straight);
           car.setSpeed(forwardSpeed);
-                            // GET /R makes the car go to the right
+                                                                               // GET /R makes the car go to the right
         }
         if (currentLine.endsWith("GET /M")){
         location_t loc = location.getGeoFromWiFi();
         client.print("Lat: " + String(loc.lat, 7) + "\n");
-
-        client.print("Lon: " + String(loc.lon, 7) + "\n");
+        client.print("Lon: " + String(loc.lon, 7) + "\n");                     // GET /M prints the location of the car
 
         }
          if (currentLine.endsWith("GET /A")){
           car.setSpeed(forwardSpeed + changeSpeed);
-                            // GET /A makes the car accelerate
+                                                                               // GET /A makes the car accelerate
          }
          if (currentLine.endsWith("GET /D")){
           car.setSpeed(forwardSpeed - changeSpeed);
-                           // GET /D makes the car decelerate
+                                                                               // GET /D makes the car decelerate
          }
         if (currentLine.endsWith("GET /G")){
           
           while (sensor.readRangeContinuousMillimeters()> millimeterLimit) {
-          car.setSpeed(forwardSpeed);         // GET /G makes the car run automatically
+          car.setSpeed(forwardSpeed);                                          // GET /G makes the car run automatically
           car.setAngle(straight);
           }
     }
