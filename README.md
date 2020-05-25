@@ -19,6 +19,9 @@ With the combination of an android application and a Smartcar device, users will
 **_What kind of technologies are we going to use?_**
 
 
+**_To get started and use this product you will need the following:_**
+
+
 **Hardware**
 
 1x Smart Car
@@ -29,41 +32,45 @@ With the combination of an android application and a Smartcar device, users will
 
 Cables
 
-2x micro-LIDAR sensors
-
-2x ultrasonic sensors
+1x micro-LIDAR sensors
 
 1x MicroUSB cable
 
 GPS
 
+Android Phone
+
 **Software**
 
-Arduino 
+Our android application to control the car
 
-Visual studio code 
+software that can upload the sketches to the car i.e. arduino IDE
 
-Intellij
 
-Android Studio 
+**_How to use it_**
 
-Smart car shield library
+First you need to add your wifi credentials in this code snippet here:
 
-Java
+ssid should be the name of your network and password your password to the network.
+the google api key is optional unless you want to use the location service.
+To generate your own go to this site and follow the steps there: https://developers.google.com/maps/documentation/android-sdk/get-api-key
 
-C++
+when the code is uploaded to the car you can now turn on the app and it will automatically connect to the car as long as it is powered on!
+
+
+
 
 **The Group 10 team:**
 
 Samar Saeed                           gussaesaa@student.gu.se
 
-Ariana Mededovic                  gusmedar@student.gu.se
+Ariana Mededovic                      gusmedar@student.gu.se
 
-Gustav Skallberg                     gusskagu@student.gu.se
+Gustav Skallberg                      gusskagu@student.gu.se
 
-Shahrzad Sheikholeslami       gussheish@student.gu.se 
+Shahrzad Sheikholeslami               gussheish@student.gu.se 
 
-Mary Olsson Radda                gusolsmafb@student.gu.se
+Mary Olsson Radda                     gusolsmafb@student.gu.se
 
-Effat Mahmud Enti                 gusentef@student.gu.se
+Effat Mahmud Enti                     gusentef@student.gu.se
 
