@@ -48,6 +48,21 @@ DirectionlessOdometer rightOdometer(
 SmartCar car(control, gyroscope, leftOdometer, rightOdometer);
 VL53L0X sensor;
 
+void objectAvoid() {
+    if(sensor.readRangeContinuousMillimeters()< millimeterLimit){ 
+        car.setSpeed(brake);              // stop,
+        delay(500);                       // wait 0,5 secs,
+        car.setSpeed(backSpeed);          // go backwards
+        delay(2000);                      // for 2 secs,
+        car.setSpeed(brake);              // brake,
+        delay(500);                       // wait 0,5 secs,
+        car.setAngle(70);                 // turn right 70 degrees,
+        car.setSpeed(forwardSpeed);       // go forward
+        delay(500);
+        car.setAngle(straight);
+        }
+  }
+
 void setup() {
   Serial.begin(115200);
   Wire.begin();
@@ -106,6 +121,7 @@ int value = 0;
 
 void loop() {
 
+   objectAvoid();
    Serial.println(sensor.readRangeContinuousMillimeters());
     Serial.println();
     WiFiClient client = server.available();   // listen for incoming clients
@@ -150,18 +166,7 @@ void loop() {
           currentLine += c;      // add it to the end of the currentLine
         }
         // Check to see what the client request consist of:
-        if(sensor.readRangeContinuousMillimeters()< millimeterLimit){ 
-        car.setSpeed(brake);              // stop,
-        delay(500);                       // wait 0,5 secs,
-        car.setSpeed(backSpeed);          // go backwards
-        delay(2000);                      // for 2 secs,
-        car.setSpeed(brake);              // brake,
-        delay(500);                       // wait 0,5 secs,
-        car.setAngle(70);                 // turn right 70 degrees,
-        car.setSpeed(forwardSpeed);       // go forward
-        delay(500);
-        car.setAngle(straight);
-        }
+        
         if (currentLine.endsWith("GET /F")) {
           car.setAngle(straight);
           car.setSpeed(forwardSpeed);                                         // GET /F makes the car run forward
@@ -217,6 +222,7 @@ void loop() {
     }
   }
   }
+  
     // close the connection:
     client.stop();
     }
