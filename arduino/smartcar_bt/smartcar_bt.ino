@@ -23,9 +23,9 @@ const unsigned long PRINT_INTERVAL = 100;
 unsigned long previousPrintout = 0;
 const auto pulsesPerMeter = 600;
 
-const char* ssid     =  "ssid";
-const char* password = "password";
-const char* googleApiKey = "apikey";
+const char* ssid     =  "aria";
+const char* password = "car12345";
+const char* googleApiKey = "AIzaSyCDFQWzjonWoG1qczPb8Kazsn9Z2RJCos0";
 
 
 WifiLocation location(googleApiKey);
@@ -132,6 +132,7 @@ void loop() {
       if (client.available()) {             // if there's bytes to read from the client,
         char c = client.read();             // read a byte, then
         Serial.write(c);                    // print it out the serial monitor
+        
         if (c == '\n') {                    // if the byte is a newline character
 
           // if the current line is blank, you got two newline characters in a row.
@@ -142,6 +143,7 @@ void loop() {
             client.println("HTTP/1.1 200 OK");
             client.println("Content-type:text/html");
             client.println();
+
             
           client.println("<!DOCTYPE HTML>");
           client.println("<html>");
@@ -212,6 +214,10 @@ void loop() {
                                                                                // GET /R makes the car go to the right
         }
         if (currentLine.endsWith("GET /M")){
+        client.println("HTTP/1.1 200 OK");
+        client.println("Content-type:text/html");
+        client.println();
+
         location_t loc = location.getGeoFromWiFi();
         client.println("HTTP/1.1 200 OK");
         client.println("Content-type:text/html");
