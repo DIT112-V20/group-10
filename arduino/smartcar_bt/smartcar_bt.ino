@@ -144,28 +144,29 @@ void loop() {
             client.println("Content-type:text/html");
             client.println();
 
+            
           client.println("<!DOCTYPE HTML>");
           client.println("<html>");
           client.println("<body>");
-          client.println("<h1>Magess</h1>");
-          client.println("<h3>Group #10</h3>");
-          client.println("<h5>Our delivery car</h5>");
+          client.println("<center><h1>Magess</h1></center>");
+          client.println("<center><h4>Group #10</h4></center>");
+          client.println("<center><h5>Our delivery car</h5><br style = “line-height:8;”><br></center>");
           client.println("</body>");
 
          // add a meta refresh tag, so the browser pulls again every 5 seconds:
          client.println("<meta http-equiv=\"refresh\" content=\"5\">");
          client.println("</html>");
-            client.println("<p>Options...</p>");
+         
             // the content of the HTTP response follows the header:
-            client.print("<button><a href=\"/F\">Forward</a></button> <br>");
-            client.print("<button><a href=\"/S\">Stop</a></button> <br>");
-            client.print("<button><a href=\"/L\">Left</a></button> <br>");
-            client.print("<button><a href=\"/R\">Right</a></button> <br>");
-            client.print("<button><a href=\"/B\">Backwards</a></button> <br>");
-            client.print("<button><a href=\"/M\">Get the current location</a></button> <br>");
-            client.print("<button><a href=\"/A\">Accelerate</a></button> <br>");
-            client.print("<button><a href=\"/D\">Deccelerate</a></button> <br>");
-            client.print("<button><a href=\"/G\">Automatic driving</a></button> <br>");
+            client.print("<center><button><a href=\"/F\">Forward</a></button> <br style = “line-height:2;”><br></center>");
+            client.print("<center><button><a href=\"/S\">Stop</a></button> <br style = “line-height:2;”><br></center>");
+            client.print("<center><button><a href=\"/L\">Left</a></button> <br style = “line-height:2;”><br></center>");
+            client.print("<center><button><a href=\"/R\">Right</a></button> <br style = “line-height:2;”><br></center>");
+            client.print("<center><button><a href=\"/B\">Backwards</a></button> <br style = “line-height:2;”><br></center>");
+            client.print("<center><button><a href=\"/M\">Get the current location</a></button> <br style = “line-height:2;”><br></center>");
+            client.print("<center><button><a href=\"/A\">Accelerate</a></button> <br style = “line-height:2;”><br></center>");
+            client.print("<center><button><a href=\"/D\">Deccelerate</a></button> <br style = “line-height:2;”><br>");
+            client.print("<center><button><a href=\"/G\">Automatic driving</a></button> <br style = “line-height:2;”><br></center>");
 
             // The HTTP response ends with another blank line:
             client.println();
@@ -218,6 +219,10 @@ void loop() {
         client.println();
 
         location_t loc = location.getGeoFromWiFi();
+        client.println("HTTP/1.1 200 OK");
+        client.println("Content-type:text/html");
+        client.println();
+        
         client.print("Lat: " + String(loc.lat, 7) + "\n");
         client.print("Lon: " + String(loc.lon, 7) + "\n");                     // GET /M prints the location of the car
 
