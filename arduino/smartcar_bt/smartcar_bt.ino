@@ -147,14 +147,14 @@ void loop() {
           client.println("<html>");
           client.println("<body>");
           client.println("<center><h1>Magess</h1></center>");
-          client.println("<center><h3>Group #10</h3></center>");
-          client.println("<center><h5>Our delivery car</h5></center>");
+          client.println("<center><h4>Group #10</h4></center>");
+          client.println("<center><h5>Our delivery car</h5><br style = “line-height:8;”><br></center>");
           client.println("</body>");
 
          // add a meta refresh tag, so the browser pulls again every 5 seconds:
          client.println("<meta http-equiv=\"refresh\" content=\"5\">");
          client.println("</html>");
-         client.println("<center><p>Button options...</p></center>");
+         
             // the content of the HTTP response follows the header:
             client.print("<center><button><a href=\"/F\">Forward</a></button> <br style = “line-height:2;”><br></center>");
             client.print("<center><button><a href=\"/S\">Stop</a></button> <br style = “line-height:2;”><br></center>");
