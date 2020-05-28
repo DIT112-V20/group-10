@@ -1,0 +1,22 @@
+<resources>
+    <string name="app_name">Magess</string>
+    <string name="find_a_delivery_car">Find a delivery car</string>
+    <string name="magess">Magess</string>
+    <string name="discover">Discover</string>
+    <string name="status">Status:</string>
+    <string name="turn_on_wi_fi">Turn on Wi-Fi</string>
+    <string name="simple_listview">Simple ListView</string>
+    <string name="connect">Connect</string>
+    <string name="todo">TODO</string>
+    <string name="automatic">Automatic</string>
+    <string name="manually">Manually</string>
+    <string name="make_a_delivery">Make a delivery</string>
+    <string name="title_activity_maps">Map</string>
+    <string name="this_is_the_current_location_of_the_car">This is the current location of the car</string>
+    <string name="current_location">Current Location</string>
+    <string name="textview">TextView</string>
+    <string name="stop">STOP</string>
+    <string name="slow_down">Slow Down</string>
+    <string name="speed_up">Speed Up</string>
+
+</resources>
