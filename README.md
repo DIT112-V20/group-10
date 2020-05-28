@@ -61,7 +61,16 @@ when the code is uploaded to the car you can now turn on the app and it will aut
 
 When starting up the app you will come to this screen:
 
-![alt text](https://media.discordapp.net/attachments/701790165643034734/715542163596771398/manualcontrol.jpg?width=321&height=668)
+![app home screen](https://media.discordapp.net/attachments/701790165643034734/715542183482097684/startscreen.jpg?width=471&height=668)
+
+You can either go with automatic control or the manual control and also access the car's current location!
+
+If manual control is selected you, it will take you to this screen where you can then steer the car in different directions.
+![app manual control](https://media.discordapp.net/attachments/701790165643034734/715542163596771398/manualcontrol.jpg?width=321&height=668)
+
+And if you press location button this screen will show up
+(insert screenshot here)
+
 
 
 
