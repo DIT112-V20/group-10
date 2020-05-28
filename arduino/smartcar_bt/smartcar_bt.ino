@@ -219,9 +219,6 @@ void loop() {
         client.println();
 
         location_t loc = location.getGeoFromWiFi();
-        client.println("HTTP/1.1 200 OK");
-        client.println("Content-type:text/html");
-        client.println();
         
         client.print("Lat: " + String(loc.lat, 7) + "\n");
         client.print("Lon: " + String(loc.lon, 7) + "\n");                     // GET /M prints the location of the car
