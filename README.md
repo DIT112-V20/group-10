@@ -49,6 +49,8 @@ software that can upload the sketches to the car i.e. arduino IDE
 
 **_How to use it_**
 
+Note: you will need some prior technical knowlegde to use the car!
+
 First you need to add your wifi credentials in this code snippet here:
 
 ssid should be the name of your network and password your password to the network.
@@ -56,6 +58,12 @@ the google api key is optional unless you want to use the location service.
 To generate your own go to this site and follow the steps there: https://developers.google.com/maps/documentation/android-sdk/get-api-key
 
 when the code is uploaded to the car you can now turn on the app and it will automatically connect to the car as long as it is powered on!
+
+When starting up the app you will come to this screen:
+
+![alt text](https://media.discordapp.net/attachments/701790165643034734/715542163596771398/manualcontrol.jpg?width=321&height=668)
+
+
 
 
 
