@@ -8,7 +8,7 @@ The service features a Smartcar and an Android application, in which users can t
 
 At the moment, the product works best for personal use. We want to expand the use cases but due to time constraints and being restricted by the current pandemic it was not feasible, for the time being.
 
-**_If you would like to view a demo of the video, please click [here](add link)!_**
+**_If you would like to view a demo of the video, please click [here!](add link)_**
 
 ***
 
@@ -22,9 +22,7 @@ Due to the spread of covid-19, people are recommended to stay at home and avoid 
 
 **Hardware**
 
-1x Smartcar platform
-
-(link for setup here https://github.com/platisd/smartcar_shield)
+1x Smartcar platform (Link for everything needed can be found [here!](https://github.com/platisd/smartcar_shield))
 
 8x AA batteries
 
@@ -51,7 +49,7 @@ First the user needs to add their wifi credentials in this code snippet below he
 
 The "ssid" should be the name of the network being used, and the password of it should be simply put where "password" is stated in quotationmarks.
 The google API key is optional, but to use the map function of the app, one has to simply add it to the "googleApiKey".
-To generate one's own key, go to this site and follow the steps there: https://developers.google.com/maps/documentation/android-sdk/get-api-key
+To generate one's own key, go to [this site](https://developers.google.com/maps/documentation/android-sdk/get-api-key) and follow the steps provided.
 
 When the code is uploaded to the car the user can now turn on the app and it will automatically connect to the car as long as it is powered on!
 
@@ -80,7 +78,7 @@ If the user presses the "current location" button, this screen will show up, dis
 
 [Smartcar](https://github.com/platisd/smartcar_shield)
 
-[okhttp](https://square.github.io/okhttp/)
+[OkHttp](https://square.github.io/okhttp/)
 
 [ESPmDNS](https://github.com/espressif/arduino-esp32)
 
