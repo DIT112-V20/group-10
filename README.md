@@ -41,8 +41,6 @@ Software that can upload the sketches to the car i.e. Arduino IDE.
 ***
 **_How to use it_**
 
-Note: One will need some prior technical knowlegde to use the car!
-
 First the user needs to add their wifi credentials in this code snippet below here:
 
 ![code snippet](https://cdn.discordapp.com/attachments/712637138469912576/715943938850291853/Skarmavbild_2020-05-29_kl._17.04.51.png)
