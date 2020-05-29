@@ -76,23 +76,23 @@ If the user presses the "current location" button, this screen will show up, dis
 
 **_Dependencies_**
 
-WifiLocation https://github.com/gmag11/WifiLocation
+[WifiLocation](https://github.com/gmag11/WifiLocation)
 
-Smartcar https://github.com/platisd/smartcar_shield
+[Smartcar](https://github.com/platisd/smartcar_shield)
 
-okhttp https://square.github.io/okhttp/
+[okhttp](https://square.github.io/okhttp/)
 
-ESPmDNS https://github.com/espressif/arduino-esp32
+[ESPmDNS](https://github.com/espressif/arduino-esp32)
 
-Wire https://www.arduino.cc/en/reference/wire
+[Wire](https://www.arduino.cc/en/reference/wire)
 
-VL53L0X https://github.com/pololu/vl53l0x-arduino
+[VL53L0X](https://github.com/pololu/vl53l0x-arduino)
 
-WiFi https://www.arduino.cc/en/Reference/WiFi
+[WiFi](https://www.arduino.cc/en/Reference/WiFi)
 
-WebServer https://www.arduino.cc/en/Tutorial/WebServer
+[WebServer](https://www.arduino.cc/en/Tutorial/WebServer)
 
-Arduino_JSON https://github.com/arduino-libraries/Arduino_JSON
+[Arduino_JSON](https://github.com/arduino-libraries/Arduino_JSON)
 
 
 
