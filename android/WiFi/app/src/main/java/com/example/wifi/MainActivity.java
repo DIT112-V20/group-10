@@ -4,7 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
+import android.util.Log;
 import android.widget.Button;
 import android.widget.TextView;
 
@@ -17,6 +17,8 @@ public class MainActivity extends AppCompatActivity {
     private Button location;
     private Button automatic;
 
+    private static final String msg = "Android: ";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -26,46 +28,22 @@ public class MainActivity extends AppCompatActivity {
         buttonsInitialiser();
 
 
-        button.setOnClickListener(new View.OnClickListener() {
-            @Override
+        button.setOnClickListener(v -> openActivitySecond());
 
 
-            public void onClick(View v) {
-
-                openActivitySecond();
-//                }
-            }
-        });
-
-
-        automatic.setOnClickListener(new View.OnClickListener(){
-                                         @Override
-                                         public void onClick(View v) {
-                                             RequestHelper.requestToServer("/G");
-                                         }
-                                     }
-        );
+        automatic.setOnClickListener(v -> RequestHelper.requestToServer("/G"));
 
 
 
-        location.setOnClickListener(new View.OnClickListener(){
-
-                                        @Override
-
-                                        public void onClick(View v) {
-                                            openMapActivity();
-                                            //RequestHelper.mapCoordinatesRequestToServer("/M");
-                                        }
-                                    }
-        );
+        location.setOnClickListener(v -> openMapActivity());
     }
 
 
     public void buttonsInitialiser(){
-        textView  = (TextView) findViewById(R.id.makeDelivText);
-        button    = (Button)    findViewById(R.id.manuallyBtn);
-        location  = (Button)   findViewById(R.id.currentLocation);
-        automatic = (Button)  findViewById(R.id.manuallyBtn2);
+        textView  =  findViewById(R.id.makeDelivText);
+        button    =  findViewById(R.id.manuallyBtn);
+        location  =  findViewById(R.id.currentLocation);
+        automatic =  findViewById(R.id.manuallyBtn2);
     }
 
 
@@ -80,6 +58,37 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
+    /** Called when the activity has become visible. */
+    @Override
+    protected void onResume() {
+        super.onResume();
+        Log.d(msg, "The onResume() event");
+    }
+
+    /** Called when another activity is taking focus. */
+    @Override
+    protected void onPause() {
+        super.onPause();
+        Log.d(msg, "The onPause() event");
+    }
+
+    /** Called when the activity is no longer visible. */
+    @Override
+    protected void onStop() {
+        super.onStop();
+        Log.d(msg, "The onStop() event");
+    }
+
+    /** Called just before the activity is destroyed. */
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        Log.d(msg, "The onDestroy() event");
+    }
+
 
 
 }
+
+
+

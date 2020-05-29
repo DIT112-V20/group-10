@@ -6,9 +6,9 @@ import java.net.MalformedURLException;
 
 class RequestHelper {
 
-    public static Magess magess;
-    static HTTP server = new HTTP();
-    static MapCoordinatesRequest mapCoordinatesRequest = new MapCoordinatesRequest();
+    private static Magess magess;
+    private static HTTP server = new HTTP();
+    private static MapCoordinatesRequest mapCoordinatesRequest = new MapCoordinatesRequest();
 
     static {
         try {
@@ -18,7 +18,7 @@ class RequestHelper {
         }
     }
 
-    public static void requestToServer(String command) {
+    static void requestToServer(String command) {
         server.request(magess.getUrl().toString() + command);
     }
 
