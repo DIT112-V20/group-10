@@ -93,6 +93,13 @@ If the user presses the "current location" button, this screen will show up, dis
 [Arduino_JSON](https://github.com/arduino-libraries/Arduino_JSON)
 
 
+***
+
+**_Resources_**
+
+*Used from Github*
+
+[Map codes](https://gist.github.com/saxman/5347195)
 
 ***
 
