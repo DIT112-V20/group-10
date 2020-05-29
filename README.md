@@ -97,9 +97,7 @@ If the user presses the "current location" button, this screen will show up, dis
 
 **_Resources_**
 
-*Used from Github*
-
-[Map codes](https://gist.github.com/saxman/5347195)
+*Used from Github* : [Map codes](https://gist.github.com/saxman/5347195)
 
 *Codes from StackOverflow helped in fixing various bugs*
 
