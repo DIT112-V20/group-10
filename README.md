@@ -45,7 +45,7 @@ Note: One will need some prior technical knowlegde to use the car!
 
 First the user needs to add their wifi credentials in this code snippet below here:
 
-![code snippet](https://cdn.discordapp.com/attachments/712637138469912576/715561574172983377/Screenshot_from_2020-05-25_11-10-59.png)
+![code snippet](https://cdn.discordapp.com/attachments/712637138469912576/715943938850291853/Skarmavbild_2020-05-29_kl._17.04.51.png)
 
 The "ssid" should be the name of the network being used, and the password of it should be simply put where "password" is stated in quotationmarks.
 The google API key is optional, but to use the map function of the app, one has to simply add it to the "googleApiKey".
