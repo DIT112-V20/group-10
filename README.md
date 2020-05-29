@@ -36,7 +36,7 @@ Android Phone
 
 Our android application ("Magess") to control the car.
 
-Software that can upload the sketches to the car i.e. Arduino IDE.
+Software that can upload the sketches to the car i.e. [Arduino IDE.](https://www.arduino.cc/en/main/software)
 
 ***
 **_How to use it_**
@@ -97,7 +97,10 @@ If the user presses the "current location" button, this screen will show up, dis
 
 *Used from Github* : [Map codes](https://gist.github.com/saxman/5347195)
 
+[Some other codes used](https://stackoverflow.com/questions/7064857/making-an-android-map-menu-to-change-map-type)
+
 *Codes from StackOverflow helped in fixing various bugs related to the app*
+
 
 ***
 
