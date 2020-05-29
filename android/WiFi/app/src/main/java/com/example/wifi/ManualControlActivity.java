@@ -2,6 +2,7 @@ package com.example.wifi;
 
 
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.Toast;
@@ -9,6 +10,7 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 public class ManualControlActivity extends AppCompatActivity {
+    private static final String msg = "Android: ";
 
     ImageButton forward;
     ImageButton backward;
@@ -67,14 +69,14 @@ public class ManualControlActivity extends AppCompatActivity {
 
         speedUp.setOnClickListener(v -> {
             RequestHelper.requestToServer("/A");
-            Toast.makeText(getApplicationContext(), "Stopping", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(), "Speed up", Toast.LENGTH_SHORT).show();
 
         });
 
 
         speedDown.setOnClickListener(v -> {
             RequestHelper.requestToServer("/D");
-            Toast.makeText(getApplicationContext(), "Stopping", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(), "Slowed down", Toast.LENGTH_SHORT).show();
 
         });
 
@@ -90,4 +92,34 @@ public class ManualControlActivity extends AppCompatActivity {
         speedUp   =  findViewById(R.id.speedUp);
 
     }
+
+
+    /** Called when the activity has become visible. */
+    @Override
+    protected void onResume() {
+        super.onResume();
+        Log.d(msg, "The onResume() event");
+    }
+
+    /** Called when another activity is taking focus. */
+    @Override
+    protected void onPause() {
+        super.onPause();
+        Log.d(msg, "The onPause() event");
+    }
+
+    /** Called when the activity is no longer visible. */
+    @Override
+    protected void onStop() {
+        super.onStop();
+        Log.d(msg, "The onStop() event");
+    }
+
+    /** Called just before the activity is destroyed. */
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        Log.d(msg, "The onDestroy() event");
+    }
+
 }

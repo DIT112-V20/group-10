@@ -1,6 +1,5 @@
 package com.example.wifi;
 
-import android.util.Log;
 
 import java.io.IOException;
 import java.util.Objects;
@@ -11,10 +10,9 @@ import okhttp3.Request;
 import okhttp3.Response;
 
 class MapCoordinatesRequest {
-    String serverResponse = "";
 
 
-     public String request(String url) throws IOException {
+    String request(String url) throws IOException {
          OkHttpClient newClient = new OkHttpClient.Builder()
                  .connectTimeout(5, TimeUnit.MINUTES) // connect timeout
                  .writeTimeout(5, TimeUnit.MINUTES) // write timeout
@@ -23,20 +21,16 @@ class MapCoordinatesRequest {
 
          Request request = new Request.Builder().url(url).build();
 
-         try (Response response = newClient.newCall(request).execute()) {
+        String serverResponse ;
+        try (Response response = newClient.newCall(request).execute()) {
              try {
-                 //set time in mili
-                 Thread.sleep(4000);
+                 Thread.sleep(3000);
 
              }catch (Exception e){
                  e.printStackTrace();
              }
 
-            String responseBody = response.body().string();
-            //System.out.println("First response is " +responseBody);
-            serverResponse = responseBody ;
-            //System.out.println("Second response is " + serverResponse);
-            // ... do something with response
+            serverResponse = Objects.requireNonNull(response.body()).string();
         }
         return serverResponse;
     }
