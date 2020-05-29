@@ -94,15 +94,19 @@ Arduino_JSON https://github.com/arduino-libraries/Arduino_JSON
 
 **The Group 10 team:**
 
-Samar Saeed                           gussaesaa@student.gu.se
+**M**ary Olsson Radda                     gusolsmafb@student.gu.se
 
-Ariana Mededovic                      gusmedar@student.gu.se
+**A**riana Mededovic                      gusmedar@student.gu.se
 
-Gustav Skallberg                      gusskagu@student.gu.se
+**G**ustav Skallberg                      gusskagu@student.gu.se
 
-Shahrzad Sheikholeslami               gussheish@student.gu.se 
+**E**ffat Mahmud Enti                     gusentef@student.gu.se
 
-Mary Olsson Radda                     gusolsmafb@student.gu.se
+**S**amar Saeed                           gussaesaa@student.gu.se
 
-Effat Mahmud Enti                     gusentef@student.gu.se
+**S**hahrzad Sheikholeslami               gussheish@student.gu.se 
+
+
+
+
 
