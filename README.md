@@ -8,7 +8,7 @@ The service features a Smartcar and an Android application, in which users can t
 
 At the moment, the product works best for personal use. We want to expand the use cases but due to time constraints and being restricted by the current pandemic it was not feasible, for the time being.
 
-**_If you would like to view a demo of the video, please click [here!](add link)_**
+**_If you would like to view a demo of the video, please click [here!](https://www.youtube.com/watch?v=N9vX65d7F5o&feature=youtu.be)_**
 
 ***
 
